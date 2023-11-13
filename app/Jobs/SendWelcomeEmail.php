@@ -9,9 +9,9 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\VerifyEmail;
+use App\Mail\WelcomeEmail;
 
-class SendVerificationEmail implements ShouldQueue
+class SendWelcomeEmail implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -27,9 +27,9 @@ class SendVerificationEmail implements ShouldQueue
         // Send the verification email
         $user = $this->user;
         // /dd($user->email);
-        $email = new VerifyEmail($user);
         
         
-        Mail::to($user->email)->send(new VerifyEmail($user));
+        
+        Mail::to($user->email)->send(new WelcomeEmail($user));
     }
 }

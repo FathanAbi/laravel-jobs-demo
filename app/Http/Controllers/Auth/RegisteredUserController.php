@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
-use App\Jobs\SendVerificationEmail;
+
+use App\Jobs\SendWelcomeEmail;
 
 class RegisteredUserController extends Controller
 {
@@ -49,7 +50,8 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         
-        dispatch(new SendVerificationEmail($user));
+        
+        SendWelcomeEmail::dispatch($user)->onQueue('email');
 
         Auth::login($user);
 

@@ -11,7 +11,7 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Address;
 
-class VerifyEmail extends Mailable
+class WelcomeEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -29,8 +29,8 @@ class VerifyEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('lraveljobsdemo@gmail.com', 'Laravel Jobs Demo'),
-            subject: 'Email Verified',
+            from: new Address('laraveljobsdemo@gmail.com', 'Laravel Jobs Demo'),
+            subject: 'Welcome to Laravel-Jobs-Demo',
         );
     }
 
@@ -40,7 +40,7 @@ class VerifyEmail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.verify',
+            view: 'emails.welcome',
             with: [
                 'name' => $this->user->name,
                 'email' => $this->user->email,
